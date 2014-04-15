@@ -19,7 +19,13 @@ block body
 	script(type="text/template", id="userTemplate")
 		span
 			{{ nickName }}
-			img(src="http://www.eeechat.net/Avatars/{{ nickName }}", width="32", height="32")
+			img(src="http://www.eeechat.net/Avatars/{{ nickName }}", width="32", height="32", style="display:inline")
+
+	script(type="text/template", id="messageTemplate")
+		span
+			{{ sender }} -> {{ recipients }} at {{ createdAt }}
+			p
+				{{ content }}
 
 	.top-bar
 		.container.clearfix

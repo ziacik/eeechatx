@@ -9,18 +9,19 @@ $(document).ready(function() {
 		model : UserModel
 	});
 
-	// var MessageModel = Backbone.Model.extend({
-	// urlRoot : '/message',
-	// });
-	//
-	// var MessageCollection = Backbone.Collection.extend({
-	// url : '/message',
-	// model : MessageModel
-	// });
+	var MessageModel = Backbone.Model.extend({
+		urlRoot : '/message',
+	});
+
+	var MessageCollection = Backbone.Collection.extend({
+		url : '/message',
+		model : MessageModel
+	});
 
 	_.templateSettings = {
 		interpolate : /\{\{(.+?)\}\}/g
 	};
+
 	var UsersView = Backbone.View.extend({
 		el : '#usersContainer',
 		initialize : function() {
@@ -36,37 +37,36 @@ $(document).ready(function() {
 		}
 	});
 
+	var MessagesView = Backbone.View.extend({
+		el : '#messagesContainer',
+		initialize : function() {
+			this.collection.on('add', this.render, this);
+			this.render();
+		},
+		template : _.template($("#messageTemplate").html()),
+		render : function() {
+			this.$el.html("");
+			this.collection.each(function(msg) {
+				this.$el.append(this.template(msg.toJSON()));
+			}, this);
+		}
+	});
+
 	var users = new UserCollection();
 
-	var mView = new UsersView({
+	var usersView = new UsersView({
 		collection : users
 	});
 
 	users.fetch();
 
-//	var UsersView = Backbone.View.extend({
-//
-//		el : $('#usersContainer'),
-//
-//		initialize : function() {
-//			var self = this;
-//			this.collection = new UserCollection();
-//			this.collection.fetch().done(function() {
-//				self.render();
-//			});
-//
-//		},
-//		render : function() {
-//			this.collection.each(function(user) {
-//				var template = _.template($("#userTemplate").html(), user);
-//				alert(template);
-//				$("#usersContainer").append(template);
-//			});
-//		}
-//	});
-//
-//	new UsersView();
-	// usersView.render();
+	var messages = new MessageCollection();
+
+	var messagesView = new MessagesView({
+		collection : messages
+	});
+
+	messages.fetch();
 
 	/*
 	 * $("#postMessageButton").click(function(){ var messageText =
