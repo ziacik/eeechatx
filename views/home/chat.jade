@@ -23,7 +23,7 @@ block body
 
 	script(type="text/template", id="messageTemplate")
 		span
-			{{ sender }} -> {{ recipients }} at {{ createdAt }}
+			{{ sender }} at {{ createdAt }}
 			p
 				{{ content }}
 
@@ -35,9 +35,13 @@ block body
 		.main
 			h1#main-title Eee chat
 			h2 Connected users
-			#usersContainer
-			#messagesContainer
 
+			#usersContainer
+
+			#messagesContainer
+			
+			textarea#message(placeholder='Enter message')
+			button#sendButton Send
 
 			.steps
 				ul.getting-started
