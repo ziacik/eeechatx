@@ -11,7 +11,7 @@ $(document).ready(function() {
 	            where = {
 	                where: options.where
 	            };
-	        }      
+	        }
 	        if(typeof this.sailsCollection === "string" && this.sailsCollection !== "") {
 	        	console.log('gonna connect');
 	            this.socket = io.connect();
@@ -21,7 +21,7 @@ $(document).ready(function() {
 			        	console.log('users');
 	                    this.set(users);
 	                }, this));
-	     
+
 	                this.socket.on("message", _.bind(function(msg){
 			        	console.log('message');
 	                    var m = msg.verb;
@@ -38,7 +38,7 @@ $(document).ready(function() {
 	            console.log("Error: Cannot retrieve models because property 'sailsCollection' not set on the collection");
 	        }
 	    }
-	});	
+	});
 
 	var UserModel = Backbone.Model.extend({
 		urlRoot : '/user',
@@ -53,20 +53,15 @@ $(document).ready(function() {
 		urlRoot : '/message',
 	});
 
-//	var MessageCollection = Backbone.Collection.extend({
-//		url : '/message',
-//		model : MessageModel
-//	});
-	
 	var MessageCollection = SailsCollection.extend({
 	    sailsCollection: 'message',
 	    model: MessageModel
 	});
 
-	_.templateSettings = {
-		interpolate : /\{\{(.+?)\}\}/g
-	};
-	
+//	_.templateSettings = {
+//		interpolate : /\{\{(.+?)\}\}/g
+//	};
+
 	var UsersView = Backbone.View.extend({
 		el : '#usersContainer',
 		initialize : function() {
@@ -113,10 +108,10 @@ $(document).ready(function() {
 
 	messages.fetch();
 
-	
-	$("#sendButton").click(function() { 
+
+	$("#sendButton").click(function() {
 		var messageText = $("#message").val();
-		messages.create({sender:'kolik', content: messageText}, {wait: true}); 
-		$("#message").val(""); 
-	});	 
+		messages.create({sender:'kolik', content: messageText}, {wait: true});
+		$("#message").val("");
+	});
 });

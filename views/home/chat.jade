@@ -17,9 +17,9 @@ block scripts
 
 block body
 	script(type="text/template", id="userTemplate")
-		span
-			{{ nickName }}
-			img(src="http://www.eeechat.net/Avatars/{{ nickName }}", width="32", height="32", style="display:inline")
+		| <span>
+		|   <%= nickName %>
+		|	  <img src="http://www.eeechat.net/Avatars/<%= nickName %>", width="32", height="32", style="display:inline" />
 
 	script(type="text/template", id="messageTemplate")
 		span
@@ -39,7 +39,7 @@ block body
 			#usersContainer
 
 			#messagesContainer
-			
+
 			textarea#message(placeholder='Enter message')
 			button#sendButton Send
 
