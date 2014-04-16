@@ -1,8 +1,6 @@
 extends ../layout
 
 block styles
-	// Default home page
-	// <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,700italic,400,300,700' rel='stylesheet'/>
 	link(href='http://sailsjs.org/styles/fonts.css', rel='stylesheet')
 	style.
 		/* Styles included inline since you'll probably be deleting this page anyway */
@@ -18,14 +16,14 @@ block scripts
 block body
 	script(type="text/template", id="userTemplate")
 		| <span>
-		|   <%= nickName %>
-		|	  <img src="http://www.eeechat.net/Avatars/<%= nickName %>", width="32", height="32", style="display:inline" />
+		|	<img title="<%= nickName %>" alt="<%= nickName %>" src="http://www.eeechat.net/Avatars/<%= nickName %>", width="32", height="32", style="display:inline" />
+		| </span>
 
 	script(type="text/template", id="messageTemplate")
-		span
-			{{ sender }} at {{ createdAt }}
-			p
-				{{ content }}
+		| <span>
+		|	<%= sender %> at <%= createdAt %>
+		|	<p><%= content %></p>
+		| </span>
 
 	.top-bar
 		.container.clearfix
