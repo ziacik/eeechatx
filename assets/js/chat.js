@@ -117,7 +117,7 @@ $(document).ready(function() {
 			var message = messages.get(id);
 			message.save({ content: newValue });
 		} else {
-			messages.create({sender:'kolik', content: newValue});
+			messages.create({ content: newValue });
 		}
 	}
 	

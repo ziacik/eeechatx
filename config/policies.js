@@ -19,7 +19,8 @@ module.exports.policies = {
   '*': 'isAuthenticated',
   MainController: {
   	'*': true
-  }
+  },
+  'message' : 'messagePolicy'
 
   /*
 	// Here's an example of adding some policies to a controller

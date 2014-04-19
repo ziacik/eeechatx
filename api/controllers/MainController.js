@@ -28,9 +28,20 @@ module.exports = {
 		return res.view('home/index');
 	},
 	login : function(req, res) {
-		//TODO:
-		req.session.authenticated = true;
-		req.session.user = "kolik";
-		return res.redirect('/chat');
+		var username = "kacenka";		
+		     
+		User.findOneByNickName(username).done(function(err, usr) {
+		    if (err) {
+		        res.send(500, { error: "DB Error" });
+		    } else {
+		        if (usr) {
+					req.session.authenticated = true;		            
+	                req.session.user = usr;
+	                res.send(usr);
+		        } else {
+		            res.send(404, { error: "User not Found" });
+		        }		        
+		    }
+		});
 	}
 };

@@ -10,7 +10,7 @@
 module.exports = {
 
 	attributes : {
-		nickname : {
+		nickName : {
 			type : 'string',
 			required : false
 		},
