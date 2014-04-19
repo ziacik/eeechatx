@@ -13,6 +13,11 @@ module.exports = {
 		nickname : {
 			type : 'string',
 			required : false
+		},
+		email: {
+			type: 'string',
+			unique: true,
+			required: true
 		}
 	}
 
