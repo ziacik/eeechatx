@@ -2,19 +2,21 @@ $(document).ready(function() {
 	var SailsCollection = Backbone.Collection.extend({
 	    sailsCollection: "",
 	    socket: null,
+	    where: { },
 	    sync: function(method, model, options){
-	        var where = { createdAt : { '>' : '2014-04-19' } }; //TODO hardcoded
 	        if (options.where) {
-	            where = {
-	                where: options.where
-	            };
+	            this.where = options.where;
 	        }
 	        if(typeof this.sailsCollection === "string" && this.sailsCollection !== "") {
 	            this.socket = io.connect();
 	            this.socket.on("connect", _.bind(function(){
-	                this.socket.request("/" + this.sailsCollection, where, _.bind(function(users){
-	                    this.set(users);
+	                this.socket.request("/" + this.sailsCollection, this.where, _.bind(function(models){
+	                    this.set(models);
 	                }, this));
+	                
+	                this.socket.on("someoneDisconnected", _.bind(function(data) {
+	                	alert('hey!');
+	                }));
 
 	                this.socket.on("message", _.bind(function(msg){
 	                    var m = msg.verb;
@@ -48,7 +50,8 @@ $(document).ready(function() {
 
 	var MessageCollection = SailsCollection.extend({
 	    sailsCollection: 'message',
-	    model: MessageModel
+	    model: MessageModel,
+	    where: { createdAt : { '>' : Date.today() } }
 	});
 		
 	var UsersView = Backbone.View.extend({
@@ -118,6 +121,7 @@ $(document).ready(function() {
 			message.save({ content: newValue });
 		} else {
 			messages.create({ content: newValue });
+			$('#newMessageInput').editable('setValue', null);
 		}
 	}
 	

@@ -21,12 +21,17 @@ module.exports.sockets = {
 		// This is a good place to subscribe a new socket to a room, inform
 		// other users that
 		// someone new has come online, or any other custom socket.io logic
+		console.log('Someone connected');
 	},
 
 	// This custom onDisconnect function will be run each time a socket
 	// disconnects
 	onDisconnect : function(session, socket) {
-
+		
+		console.log('Someone disconnected.');
+		console.log(session);
+		console.log(socket);
+		socket.emit('someoneDisconnected');
 		// By default: do nothing
 		// This is a good place to broadcast a disconnect message, or any other
 		// custom socket.io logic
