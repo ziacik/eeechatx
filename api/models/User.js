@@ -10,15 +10,23 @@
 module.exports = {
 
 	attributes : {
-		nickName : {
-			type : 'string',
-			required : false
-		},
 		email: {
 			type: 'string',
 			unique: true,
 			required: true
+		},
+		password: {
+			type: 'string'
+		},
+		salt: {
+			type: 'string'
+		},
+		nickName : {
+			type : 'string',
+			required : false
+		},
+		color: {
+			type: 'string'
 		}
 	}
-
 };

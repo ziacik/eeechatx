@@ -33,7 +33,17 @@ module.exports.routes = {
   //
   // (This would also work if you had a file at: `/views/home.ejs`)
   '/': 'MainController',
-  '/chat': 'ChatController'
+  '/chat': 'ChatController',
+  
+   '/login' : {
+    controller : 'auth',
+    action : 'index'
+  },
+
+  '/logout' : {
+    controller : 'auth',
+    action : 'logout'
+  }
 
   /*
   // But what if you want your home page to display
