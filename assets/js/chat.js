@@ -13,7 +13,7 @@ $(document).ready(function() {
 	                this.socket.request("/" + this.sailsCollection, this.where, _.bind(function(models){
 	                    this.set(models);
 	                }, this));
-	                
+
 	                this.socket.on("someoneDisconnected", _.bind(function(data) {
 	                	alert('hey!');
 	                }));
@@ -53,7 +53,7 @@ $(document).ready(function() {
 	    model: MessageModel,
 	    where: { createdAt : { '>' : Date.today() } }
 	});
-		
+
 	var UsersView = Backbone.View.extend({
 		el : '#usersContainer',
 		initialize : function() {
@@ -81,17 +81,17 @@ $(document).ready(function() {
 		template : _.template($("#messageTemplate").html()),
 		render : function(model, x, y) {
 			if (model && model.id) {
-				var data = { model : model.toJSON(), renderUser : renderUserTemplate };				
+				var data = { model : model.toJSON(), renderUser : renderUserTemplate };
 				var messageElement = $("#Message" + model.id, this.$el);
-				
+
 				if (messageElement.length > 0)
 					messageElement = messageElement.html(this.template(data));
-				else				
-					messageElement = this.$el.append(this.template(data));					
-					
-				$('.messageInput', $(messageElement)).editable({ success: send });		
-				$('#newMessageInput').editable('show');		
-			}			
+				else
+					messageElement = this.$el.append(this.template(data));
+
+				$('.messageInput', $(messageElement)).editable({ success: send, rows: 2 });
+				$('#newMessageInput').editable('show');
+			}
 		}
 	});
 
@@ -104,7 +104,7 @@ $(document).ready(function() {
 	users.fetch();
 
 	var messages = new MessageCollection();
-	
+
 	var messagesView = new MessagesView({
 		collection : messages
 	});
@@ -113,9 +113,9 @@ $(document).ready(function() {
 
 	$.fn.editable.defaults.mode = 'inline';
 
-	var send = function(response, newValue) {		
+	var send = function(response, newValue) {
 		var id = $(this).attr('data-pk');
-		
+
 		if (id) {
 			var message = messages.get(id);
 			message.save({ content: newValue });
@@ -124,10 +124,11 @@ $(document).ready(function() {
 			$('#newMessageInput').editable('setValue', null);
 		}
 	}
-	
+
 	$('#newMessageInput').editable({
-		success: send
+		success: send,
+		rows: 2
 	});
-	
+
 	$('#newMessageInput').editable('show');
 });

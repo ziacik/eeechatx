@@ -1,41 +1,63 @@
 doctype html
+
+mixin fa(type, text)
+    span(class='fa fa-'+type)
+    = text
+
+mixin faButtonDefault(faType, href, text)
+    a.btn.btn-default(href=href)
+        +fa(faType, text)
+
+mixin faButtonPrimary(faType, href, text)
+    a.btn.btn-primary(href=href)
+        +fa(faType, text)
+
+mixin buttonPrimary(href, text)
+    a.btn.btn-primary(href=href)= text
+
+mixin inputRequired(type, id, text)
+    .form-group
+        label= text
+        input.form-control(type=type, name=id, id=id, required)
+
+mixin input(type, id, text)
+    .form-group
+        label= text
+        input.form-control(type=type, name=id, id=id)
+
+
 html
-	head
-		title= title
+    head
+        title= title
+        //- Maybe remove maximum scale?
+        meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
 
-		// Viewport mobile tag for sensible mobile support
-		meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
+        block styles
 
-		block styles
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
 
-		// link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
-		// link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
+        script(type="text/javascript", src="//code.jquery.com/jquery-1.11.0.min.js")
+        script(type="text/javascript", src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js")
+        script(type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js")
+        script(type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js")
 
-		// script(type="text/javascript", src="//code.jquery.com/jquery-1.11.0.min.js")
-		// script(type="text/javascript", src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js")		
-		// script(type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js")
-		// script(type="text/javascript", src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js")
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
+        script(src='https://code.jquery.com/jquery-2.1.0.min.js')
 
-		link(rel='stylesheet', href='/styles/bootstrap.min.css')
-		link(rel='stylesheet', href='/styles/font-awesome.min.css')
+        block scripts
+    body
+        .container
+            block body
 
-		script(type="text/javascript", src="/js/jquery-1.11.0.min.js")
-		script(type="text/javascript", src="/js/bootstrap.min.js")		
-		script(type="text/javascript", src="/js/underscore-min.js")
-		script(type="text/javascript", src="/js/backbone-min.js")
+        // A few key dependencies, linked in order
 
-		block scripts
-		
-	body
-		block body
+        // Bring in the socket.io client
+        script(type="text/javascript", src="/js/socket.io.js")
 
-		// A few key dependencies, linked in order
+        // then beef it up with some convenience logic for talking to Sails.js'
+        script(type="text/javascript", src="/js/sails.io.js")
 
-		// Bring in the socket.io client
-		script(type="text/javascript", src="/js/socket.io.js")
-
-		// then beef it up with some convenience logic for talking to Sails.js'
-		script(type="text/javascript", src="/js/sails.io.js")
-
-		// listen on socket.io for incoming messages
-		script(type="text/javascript", src="/js/app.js")
+        // listen on socket.io for incoming messages
+        script(type="text/javascript", src="/js/app.js")

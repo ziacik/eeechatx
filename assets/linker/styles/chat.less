@@ -1,19 +1,16 @@
-@topbarHeight: 42px;
+@topbarHeight: 60px;
 
 body {
 	font-family: 'Helvetica Neue',Helvetica,Arial,'lucida grande',tahoma,verdana,arial,sans-serif;
 }
 
 #topbar {
-	background-color: #000088;
-	font-weight: bold;
-	color: White;
-	height: @topbarHeight;
+	background-color: White;
 	position: fixed;
-	left: 0;
-	right: 0;
 	top: 0;
-	z-index: 100;	
+	left: 0;
+	z-index: 100;
+	border-bottom: 1px solid #ccc;
 }
 
 #topbar h1 {
@@ -34,4 +31,10 @@ body {
 
 .Clear {
 	clear: both;
+	height: 0px;
+}
+
+hr {
+	margin-top: 1em !important;
+	margin-bottom: 1em !important;
 }
