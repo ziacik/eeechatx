@@ -60,7 +60,7 @@ module.exports = {
 
             passport.use(new FacebookStrategy({
                     clientID: "485905004858134",
-                    clientSecret: "xy",
+                    clientSecret: "42aa628df64300147b845b94e1f9fe99",
                     callbackURL: "http://localhost:1337/auth/facebook/callback"
                 },
                 verifyHandler
@@ -68,7 +68,7 @@ module.exports = {
 
             passport.use(new GoogleStrategy({
                     clientID: '319700997687.apps.googleusercontent.com',
-                    clientSecret: 'xy',
+                    clientSecret: '0bSGvKf7AuLX28BMClx9_9gM',
                     callbackURL: 'http://localhost:1337/auth/google/callback'
                 },
                 verifyHandler
