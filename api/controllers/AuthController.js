@@ -51,9 +51,9 @@ module.exports = {
     },
 
     // https://developers.google.com/
-    // https://developers.google.com/accounts/docs/OAuth2Login#scope-param
+    // https://developers.google.com/accounts/docs/OAuth2Login#scope-param 'https://www.googleapis.com/auth/plus.login',
     google: function (req, res) {
-        passport.authenticate('google', { failureRedirect: '/login', scope:['https://www.googleapis.com/auth/plus.login','https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email'] },
+        passport.authenticate('google', { failureRedirect: '/login', scope:['https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email'] },
             function (err, user) {
                 if (err) {
                 	res.serverError(err);

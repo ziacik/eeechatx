@@ -16,19 +16,19 @@ block scripts
 block body
     script(type="text/template", id="userTemplate")
         | <span>
-        |    <img title="<%= model.nickName %>" alt="<%= model.nickName %>" src="http://www.eeechat.net/Avatars/<%= model.nickName %>" width="<%= options.size %>" height="<%= options.size %>" style="display:inline" />
+        |    <img title="<%= model.name %>" alt="<%= model.name %>" src="<%= model.picture %>" width="<%= options.size %>" height="<%= options.size %>" style="display:inline" />
         | </span>
 
     script(type="text/template", id="messageTemplate")
         | <div id="Message<%= model.id %>">
         | <div class="Side">
-        |    <%= renderUser({ model : { nickName : model.sender }, options: { size : 48 } }) %>
+        |    <%= renderUser({ model : user, options: { size : 48 } }) %>
         | </div>
         | <div class="Text">
         |    <div class="Head">
-        |       <%= new Date(model.createdAt).toString("HH:mm") %>&nbsp;<%= model.sender %>
+        |       <%= new Date(model.createdAt).toString("HH:mm") %>&nbsp;<%= user.name %>
         |    </div>
-        |    <% if (model.sender === 'kolik') { %>
+        |    <% if (user.name === 'kolik') { %>
         |    <a class='messageInput' href='#' data-type='textarea' data-pk='<%= model.id %>'><%= model.content %></a>
         |    <% } else { %>
         |    <%= model.content %>
@@ -46,4 +46,4 @@ block body
     .col-sm-6.col-sm-offset-3#content
         #messagesContainer
 
-        a#newMessageInput(href="#", data-type="textarea", data-title="Daj spr�vu")
+        a#newMessageInput(href="#", data-type="textarea", data-title="Daj správu")
