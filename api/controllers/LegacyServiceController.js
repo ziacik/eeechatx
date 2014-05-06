@@ -18,10 +18,44 @@
  */
 
 module.exports = {
+	"getUser.php" : function(req, res) {
+		var login = req.param("login");
+		User.findOneByName(login).done(function(err, usr) {
+		    if (err) {
+		        res.send(500, { error: "DB Error" });
+		    } else {
+		        if (usr) {
+					res.header('Content-Type', 'application/xml');
+					return res.view('legacy/user', { user: usr });
+		        } else {
+		            res.send(404, { error: "User not Found" });
+		        }		        
+		    }
+		});
+	},
 
-	rooms : function(req, res) {
+	"getRooms.php" : function(req, res) {
 		res.header('Content-Type', 'application/xml');
 		return res.view('legacy/rooms');
+	},
+	
+	"getUsers.php" : function(req, res) {
+		User.find({}, function(err, users) { //TODO err handling
+			res.header('Content-Type', 'application/xml');
+			return res.view('legacy/users', { users : users });
+		});
+	},
+	
+	"getMessages.php" : function(req, res) {
+		Message.find({}, function(err, messages) { //TODO err handling
+			res.header('Content-Type', 'application/xml');
+			return res.view('legacy/messages', { messages : messages });
+		});
+	},
+	
+	"changeState.php" : function(req, res) {
+		res.header('Content-Type', 'application/xml');
+		return res.view('legacy/ok');
 	},
 
 	/**

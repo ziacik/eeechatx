@@ -20,7 +20,7 @@ module.exports.policies = {
   AuthController: {
   	'*': true
   },
-  MainController: {
+  LegacyServiceController: {
   	'*': true
   },
   'message' : 'messagePolicy'
