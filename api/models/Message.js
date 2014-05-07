@@ -12,7 +12,7 @@ module.exports = {
 	attributes : {
 
 		sender : {
-			type : 'string',
+			type : 'integer',
 			required : true
 		},
 		recipients : {

@@ -11,19 +11,22 @@ module.exports = {
 
 	attributes : {
 		email: {
-			type: 'string',
+			type: 'email',
 			unique: true,
 			required: true
 		},
-		password: {
+		passwordHash: {
 			type: 'string'
 		},
 		salt: {
 			type: 'string'
 		},
-		nickName : {
+		name : {
 			type : 'string',
-			required : false
+			required : true
+		},
+		picture : {
+			type : 'url'
 		},
 		color: {
 			type: 'string'

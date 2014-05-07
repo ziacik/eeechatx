@@ -54,6 +54,39 @@ $(document).ready(function() {
 	    where: { createdAt : { '>' : Date.today() } }
 	});
 
+	var MessagesView = Backbone.View.extend({
+		el : '#messagesContainer',
+		initialize : function() {
+			this.collection.on('change reset add remove', this.render, this);
+			this.render();
+		},
+		template : _.template($("#messageTemplate").html()),
+		render : function(model, x, y) {
+			if (model && model.id) {
+				var modelObj = model.toJSON();
+				var user = users.get(modelObj.sender);
+				var data = { model : modelObj, user : user.toJSON(), renderUser : renderUserTemplate };
+				var messageElement = $("#Message" + model.id, this.$el);
+
+				if (messageElement.length > 0)
+					messageElement = messageElement.html(this.template(data));
+				else
+					messageElement = this.$el.append(this.template(data));
+
+				$('.messageInput', $(messageElement)).editable({ success: send, rows: 2 });
+				$('#newMessageInput').editable('show');
+			}
+		}
+	});
+
+	var messages = new MessageCollection();
+
+	var messagesView = new MessagesView({
+		collection : messages
+	});
+
+	messages.fetch();
+
 	var UsersView = Backbone.View.extend({
 		el : '#usersContainer',
 		initialize : function() {
@@ -69,47 +102,16 @@ $(document).ready(function() {
 			}, this);
 		}
 	});
-
-	var renderUserTemplate = _.template($("#userTemplate").html());
-
-	var MessagesView = Backbone.View.extend({
-		el : '#messagesContainer',
-		initialize : function() {
-			this.collection.on('change reset add remove', this.render, this);
-			this.render();
-		},
-		template : _.template($("#messageTemplate").html()),
-		render : function(model, x, y) {
-			if (model && model.id) {
-				var data = { model : model.toJSON(), renderUser : renderUserTemplate };
-				var messageElement = $("#Message" + model.id, this.$el);
-
-				if (messageElement.length > 0)
-					messageElement = messageElement.html(this.template(data));
-				else
-					messageElement = this.$el.append(this.template(data));
-
-				$('.messageInput', $(messageElement)).editable({ success: send, rows: 2 });
-				$('#newMessageInput').editable('show');
-			}
-		}
-	});
-
+	
 	var users = new UserCollection();
 
 	var usersView = new UsersView({
 		collection : users
 	});
 
-	users.fetch();
+	users.fetch();	
 
-	var messages = new MessageCollection();
-
-	var messagesView = new MessagesView({
-		collection : messages
-	});
-
-	messages.fetch();
+	var renderUserTemplate = _.template($("#userTemplate").html());
 
 	$.fn.editable.defaults.mode = 'inline';
 

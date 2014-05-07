@@ -29,8 +29,6 @@ module.exports.sockets = {
 	onDisconnect : function(session, socket) {
 		
 		console.log('Someone disconnected.');
-		console.log(session);
-		console.log(socket);
 		socket.emit('someoneDisconnected');
 		// By default: do nothing
 		// This is a good place to broadcast a disconnect message, or any other

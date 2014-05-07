@@ -2,10 +2,16 @@
  * 
  */
 module.exports = function(req, res, next) {
-	if (req.session.user) {
+	if (req.user) {
 		var action = req.method;
 		if (action === "POST" && !req.body.sender) {
-			req.body.sender = req.session.user.nickName;
+			req.body.sender = req.user.id;
+		}
+		next();
+	} else if (req.session.passport.user) {
+		var action = req.method;
+		if (action === "POST" && !req.body.sender) {
+			req.body.sender = req.session.passport.user;
 		}
 		next();
 	} else {
