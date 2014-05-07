@@ -1,0 +1,12 @@
+doctype xml
+EeeDataSet(xmlns="http://tempuri.org/EeeDataSet.xsd")
+	each message in messages
+		Message
+			MessageID= message.id
+			FromUserID 1
+			ToUserID 0
+			Message= message.content
+			Time 12:20
+			Seen 1
+			Login= message.sender
+			Color 0
